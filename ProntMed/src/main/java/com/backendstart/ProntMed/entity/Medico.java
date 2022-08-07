@@ -1,16 +1,15 @@
 package com.backendstart.ProntMed.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "tb_pessoa")
+@Table(name = "medico")
 public class Medico {
+
+    @OneToOne
+    @Column(nullable = false, name = "pessoa_cpf")
+    private Pessoa cpf;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,9 +26,6 @@ public class Medico {
 
     @Column(nullable = false, name = "senha")
     private String senha;
-
-    @Column(nullable = false, name = "pessoa_cpf")
-    private String pessoaCpf;
 
     public Long getId() {
         return id;
@@ -51,9 +47,7 @@ public class Medico {
         return senha;
     }
 
-    public String getPessoaCpf() {
-        return pessoaCpf;
-    }
+
 
     public void setId(Long id) {
         this.id = id;
@@ -75,7 +69,11 @@ public class Medico {
         this.senha = senha;
     }
 
-    public void setPessoaCpf(String pessoaCpf) {
-        this.pessoaCpf = pessoaCpf;
+    public Pessoa getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(Pessoa cpf) {
+        this.cpf = cpf;
     }
 }

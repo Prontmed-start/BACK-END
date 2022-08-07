@@ -1,20 +1,15 @@
 package com.backendstart.ProntMed.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "tb_pessoa")
+@Table(name = "exame")
 public class Exame {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @Column(nullable = false, name = "id_exame")
+    private String exame;
 
     @Column(nullable = false, name = "tipo_exame")
     private String tipoExame;
@@ -25,18 +20,22 @@ public class Exame {
     @Column(nullable = false, name = "prontuario_idprontuario")
     private String prontuarioIdProntuario;
 
+    @OneToMany
     @Column(nullable = false, name = "prontuario_paciente_pessoa_id")
-    private String prontuarioPacientePessoaId;
+    private Pessoa cpf ;
 
+    @OneToOne
+    @Column(nullable = false, name = "prontuario_idprontuario")
+    private Prontuario prontuario;
+
+    @ManyToMany
     @Column(nullable = false, name = "prontuario_medico_pessoa_cpf")
-    private String prontuarioMedicoPessoaCpf;
+    private Prontuario medicoPessoaCpf;
+
 
     @Column(nullable = false, name = "id_exames")
     private LocalDate idExames;
 
-    public Long getId() {
-        return id;
-    }
 
     public String getTipoExame() {
         return tipoExame;
@@ -50,22 +49,10 @@ public class Exame {
         return prontuarioIdProntuario;
     }
 
-    public String getProntuarioPacientePessoaId() {
-        return prontuarioPacientePessoaId;
-    }
-
-    public String getProntuarioMedicoPessoaCpf() {
-        return prontuarioMedicoPessoaCpf;
-    }
 
     public LocalDate getIdExames() {
         return idExames;
     }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public void setTipoExame(String tipoExame) {
         this.tipoExame = tipoExame;
     }
@@ -78,15 +65,39 @@ public class Exame {
         this.prontuarioIdProntuario = prontuarioIdProntuario;
     }
 
-    public void setProntuarioPacientePessoaId(String prontuarioPacientePessoaId) {
-        this.prontuarioPacientePessoaId = prontuarioPacientePessoaId;
-    }
-
-    public void setProntuarioMedicoPessoaCpf(String prontuarioMedicoPessoaCpf) {
-        this.prontuarioMedicoPessoaCpf = prontuarioMedicoPessoaCpf;
-    }
-
     public void setIdExames(LocalDate idExames) {
         this.idExames = idExames;
+    }
+
+    public String getExame() {
+        return exame;
+    }
+
+    public Pessoa getCpf() {
+        return cpf;
+    }
+
+    public void setExame(String exame) {
+        this.exame = exame;
+    }
+
+    public void setCpf(Pessoa cpf) {
+        this.cpf = cpf;
+    }
+
+    public Prontuario getProntuario() {
+        return prontuario;
+    }
+
+    public Prontuario getMedicoPessoaCpf() {
+        return medicoPessoaCpf;
+    }
+
+    public void setProntuario(Prontuario prontuario) {
+        this.prontuario = prontuario;
+    }
+
+    public void setMedicoPessoaCpf(Prontuario medicoPessoaCpf) {
+        this.medicoPessoaCpf = medicoPessoaCpf;
     }
 }

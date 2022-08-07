@@ -10,12 +10,12 @@ import javax.persistence.Table;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "tb_pessoa")
+@Table(name = "pessoa")
 public class Pessoa {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @Column(nullable = false, name ="cpf")
+    private String cpf;
 
     @Column(nullable = false, name = "nome_pessoa")
     private String nome_pessoa;
@@ -26,18 +26,12 @@ public class Pessoa {
     @Column(nullable = false, name = "email")
     private String email;
 
-    @Column(nullable = false, name ="cpf")
-    private String cpf;
-
     @Column(nullable = false, name= "telefone")
     private String telefone;
 
     @Column(nullable = false, name ="genero")
     private LocalDate genero;
 
-    public Long getId() {
-        return id;
-    }
 
     public String getNome_pessoa() {
         return nome_pessoa;
@@ -61,10 +55,6 @@ public class Pessoa {
 
     public LocalDate getGenero() {
         return genero;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public void setNome_pessoa(String nome_pessoa) {
